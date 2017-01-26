@@ -47,9 +47,18 @@ def roller va, vl
 	# in other words, if you start here, the first leg of the journey
 	# needs to provide enough net energy to counteract the
 	# highest friction/slowest point
+	rev_sums = []
+	(0..(va.length - 1)).reverse_each do |i|
+		revs = csums[i]
+		if (i < va.length - 1)
+			revs += rev_sums[i + 1]
+		end
+		rev_sums[i] = revs
+	end
+
 	csums.each_with_index do |s, index|
-		rev_sum = csums.slice(index, nets.length - 1).reduce(0, :+)
-		if (min + rev_sum) > -1
+		# rev_sum = csums.slice(index, nets.length - 1).reduce(0, :+)
+		if (min + rev_sums[index]) > -1
 			solns.push(index)
 		end
 	end
