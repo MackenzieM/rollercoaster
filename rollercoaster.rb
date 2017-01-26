@@ -15,10 +15,6 @@ def roller va, vl
 		end
 	end
 
-	# puts csums.to_s + "\n"
-	# puts nets.to_s
-	# puts min
-
 	# attempt 1 -> [2,5]
 	# csums.each_with_index do |s, index|
 	# 	if (min + s) > -1
@@ -49,8 +45,8 @@ def roller va, vl
 	# the current index is a solution.
 	#
 	# in other words, if you start here, the first leg of the journey
-	# needs to provide enough net energy to counteract the 
-	#highest friction/slowest point
+	# needs to provide enough net energy to counteract the
+	# highest friction/slowest point
 	csums.each_with_index do |s, index|
 		rev_sum = csums.slice(index, nets.length - 1).reduce(0, :+)
 		if (min + rev_sum) > -1
